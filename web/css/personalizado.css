@@ -1,0 +1,195 @@
+html{
+  background-color: #ffffff;
+}
+body{
+	color: #3d3d3d;
+}
+.summary {
+    color: white;
+}
+h1 {
+    color: #3d3d3d;
+}
+td {
+    color: #3d3d3d;
+}
+th {
+    color: #3d3d3d;
+}
+a {
+    color: #3d3d3d;
+}
+
+a.btn.btn-success {
+    color: #3d3d3d;
+    background: white;
+    border: 1px solid;
+}
+table.table.table-striped.table-bordered {
+    font-size: 10px;
+}
+.container.body {
+    background-color: #ffffff;
+}
+body .container.body .right_col {
+    background: #ffffff;
+    height: 1800px;
+}
+.left_col.scroll-view {
+    height: 1800px;
+}
+.nav_menu {
+    background: white;
+    border-bottom: 0px;
+}
+.col-md-3.left_col.fotoleal-fondo {
+    background-color: #777777;
+}
+.left_col.scroll-view {
+    background-color: #777777;
+}
+a.left_col.scroll-view:active {
+    background-color: #666666;
+}
+a.site_title {
+    background-color: #777777;
+}
+.navbar.nav_title {
+    background: white;
+}
+.nav.side-menu>li.active>a {
+    text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 0;
+    background: linear-gradient(#666666, #666666), #666666;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
+}
+.nav.side-menu>li.current-page, .nav.side-menu>li.active {
+    border-right: 5px solid #ffffff;
+}
+.jumbotron {
+    background: white;
+}
+.nav-sm ul.nav.child_menu li a {
+    text-align: left !important;
+    background: #777777;
+    color: #ffffff;
+}
+.nav-sm ul.nav.child_menu li {
+    padding: 0 10px;
+    background: #777777;
+}
+img.logo-leal {
+    height: 50px;
+    width: 100px;
+}
+.grafico1 {
+    width: 750px !important;
+    height: 300px !important;
+}
+.grafico5 {
+    width: 528px  !important;
+    height: 264px  !important;
+}
+.grafico6 {
+    width: 300px  !important;
+    height: 200px  !important;
+    margin-left: 60px;
+}
+div#chart_plot_0 {
+    border-left-style: solid;
+}
+.vendedores{
+  height:400px;
+  overflow: scroll
+}
+#divflotante{
+  position: fixed;
+  z-index: 100; /*Crea una capa nueva por encima, si tenemos una con valor 2 estará a una altura o por encima de una con
+                valor 1*/
+   margin-left:0%; /*Con este margen posicionamos el div donde queramos*/
+}
+#divflotantemenu{
+  position: fixed;
+  z-index: 100; /*Crea una capa nueva por encima, si tenemos una con valor 2 estará a una altura o por encima de una con
+                valor 1*/
+   margin-left:0%; /*Con este margen posicionamos el div donde queramos*/
+   background-color: #ffffff;
+   width: 85% !important;
+}
+.user-profile1 img {
+    width: 39px !important;
+    height: 39px !important;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#banner img {
+    vertical-align: middle;
+    width: 104%;
+    height: auto;
+    margin-left: -11px;
+    margin-top: -23px;
+}
+
+@media screen and (max-width:700px) {
+#logoepayco {
+    height: 100px;
+}
+img {
+    height: 55px;
+}
+	}
+
+/*//////////////////////////////////////////////////////////////*/
+@media screen and (max-width: 600px) {
+       table {
+           width:100%;
+       }
+       thead {
+           display: none;
+       }
+       tr:nth-of-type(2n) {
+           background-color: inherit;
+       }
+       tr td:first-child {
+           background: #f0f0f0;
+           font-weight:bold;
+           font-size:1.3em;
+       }
+       tbody td {
+           display: block;
+           text-align:center;
+       }
+       tbody td:before {
+           content: attr(data-th);
+           display: block;
+           text-align:center;
+       }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+@media screen and (max-width: 320px) {
+     table {
+       display: block;
+       overflow-x: auto;
+     }
+}
+
+@keyframes spinner {
+            0% {
+                transform: rotateZ(0deg);
+            }
+
+            100% {
+                transform: rotateZ(359deg);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+body {
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

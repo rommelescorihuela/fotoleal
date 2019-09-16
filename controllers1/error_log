@@ -1,0 +1,1 @@
+[31-Aug-2019 02:12:58 America/Chicago] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home2/fotoleal/public_html/fotoleal/controllers/ProgramaController.php on line 3
