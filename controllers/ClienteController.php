@@ -109,66 +109,72 @@ class ClienteController extends Controller
     }
     public function actionConsultaestado()
     {
+
         $model = new Pago();
         $cliente= new Cliente();
         $pago = $model->find()->where(['confirmacion'=>3])->all();
         //var_dump($pago);
         foreach ($pago as $k)
         {
-          $ref=$k['ref_payco'];
+          $ref=$k['ref_payco_corto'];
+            //$ref='9453187';
           $curl = new curl\Curl();
-          $response = $curl->get("https://secure.epayco.co/validation/v1/reference/".$ref);
+          //$response = $curl->get("https://secure.epayco.co/validation/v1/reference/".$ref);
+          $response = $curl->get("https://secure.payco.co/pasarela/estadotransaccion?id_transaccion=".$ref);
           $respuesta=json_decode($response,true);
           //echo $ref;
-          //var_dump($respuesta);
-          //exit();
-          if($respuesta['data']['x_cod_respuesta']==1)
+          //var_dump($respuesta["success"]);
+          if($respuesta["success"]==true)
           {
-            $factura=$respuesta['data']['x_id_factura'];
-            $model1 = new Pago();
-            $actp = $model1->findOne($k['id_pago']);
-            $actp->confirmacion=1;
-            $actp->factura=$factura;
-            $actp->save();
-            $id_cliente=$actp->id_cliente;
-            $cli = $cliente->find()->where(['id_cliente'=>$id_cliente])->one();
-            $items="";
-            $modelpago=new Pago();
-            $pagos=$modelpago->findAll(['id_cliente'=>$id_cliente]);
-            foreach($pagos as $p)
-            {
-                $items .= "$".$p['monto']." En la fecha: ".$p['fecha_pago']."<br>";
-            }
-            $tabla="<table border='1'>";
+              if($respuesta['data']['x_cod_respuesta']==1)
+              {
+                $factura=$respuesta['data']['x_id_factura'];
+                $model1 = new Pago();
+                $actp = $model1->findOne($k['id_pago']);
+                $actp->confirmacion=1;
+                $actp->factura=$factura;
+                $actp->save();
+                $id_cliente=$actp->id_cliente;
+                $cli = $cliente->find()->where(['id_cliente'=>$id_cliente])->one();
+                $items="";
+                $modelpago=new Pago();
+                $pagos=$modelpago->findAll(['id_cliente'=>$id_cliente]);
+                foreach($pagos as $p)
+                {
+                    $items .= "$".$p['monto']." En la fecha: ".$p['fecha_pago']."<br>";
+                }
+                $tabla="<table border='1'>";
 
-            $tabla.="<tr><td>nombre:</td>
-                <td>cedula:</td>
-                <td>Pagos recibidos</td></tr>
-                <tr><td>$cli->nombre $cli->apellido</td>
-                    <td>$cli->cedula</td>
-                    <td>$items</td></tr>";
+                $tabla.="<tr><td>nombre:</td>
+                    <td>cedula:</td>
+                    <td>Pagos recibidos</td></tr>
+                    <tr><td>$cli->nombre $cli->apellido</td>
+                        <td>$cli->cedula</td>
+                        <td>$items</td></tr>";
 
-            $tabla.="</table>";
+                $tabla.="</table>";
 
-            $numero=rand(10,100000000);
-            $path=Yii::getAlias('@webroot');
-            $filename = $path.'/qr/test'.$numero.'.png';
-            $qr='../../qr/test'.$numero.'.png';
-            $qr1='test'.$numero.'.png';
-            $matrixPointSize = min(max((int)10, 1), 10);
-            $info=$cli->nombre.' '.$items;
-            QRcode::png($info, $filename, 'H', $matrixPointSize, 2);
-            //echo '<img src="'.$qr.'" style=height: 300px;/><hr/>';
+                $numero=rand(10,100000000);
+                $path=Yii::getAlias('@webroot');
+                $filename = $path.'/qr/test'.$numero.'.png';
+                $qr='../../qr/test'.$numero.'.png';
+                $qr1='test'.$numero.'.png';
+                $matrixPointSize = min(max((int)10, 1), 10);
+                $info=$cli->nombre.' '.$items;
+                QRcode::png($info, $filename, 'H', $matrixPointSize, 2);
+                //echo '<img src="'.$qr.'" style=height: 300px;/><hr/>';
 
-            $content = "<p>Muchas gracias, tú pago se ha registrado satisfactoriamente.
-            Te recomendamos estar atento a las indicaciones que te den los fotógrafos antes, durante y después de la ceremonia para una buena toma de tu fotografía</p><br/>".$tabla ;
-            Yii::$app->mailer->compose("@app/mail/layouts/html", ["content" => $content])
-            ->setFrom('soporteventas@fotografialeal.com')
-            ->setTo($cli->correo)
-            ->setSubject('comprobante de pago')
-            ->attach(Yii::$app->request->hostInfo.'/fotoleal/web/qr/'.$qr1)
-            ->send();
-            
+                $content = "<p>Muchas gracias, tú pago se ha registrado satisfactoriamente.
+                Te recomendamos estar atento a las indicaciones que te den los fotógrafos antes, durante y después de la ceremonia para una buena toma de tu fotografía</p><br/>".$tabla ;
+                Yii::$app->mailer->compose("@app/mail/layouts/html", ["content" => $content])
+                ->setFrom('soporteventas@fotografialeal.com')
+                ->setTo($cli->correo)
+                ->setSubject('comprobante de pago')
+                ->attach(Yii::$app->request->hostInfo.'/fotoleal/web/qr/'.$qr1)
+                ->send();
+                
+
+              }
 
           }
         }  

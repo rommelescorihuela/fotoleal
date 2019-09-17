@@ -7,15 +7,15 @@ use Yii;
 /**
  * This is the model class for table "foto_adicional".
  *
- * @property int $id_foto
- * @property int $cantidad_foto
- * @property int $monto
- * @property int $total
- * @property int $id_usuario
- * @property int $id_cliente
+ * @property string $id_foto
+ * @property string $cantidad_foto
+ * @property string $monto
+ * @property string $total
+ * @property string $id_usuario
+ * @property string $id_cliente
  *
- * @property Cliente $cliente
  * @property Usuario $usuario
+ * @property Cliente $cliente
  * @property PagoFoto[] $pagoFotos
  */
 class FotoAdicional extends \yii\db\ActiveRecord
@@ -23,6 +23,7 @@ class FotoAdicional extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $cedula;
     public static function tableName()
     {
         return 'foto_adicional';
@@ -35,9 +36,9 @@ class FotoAdicional extends \yii\db\ActiveRecord
     {
         return [
             [['cantidad_foto', 'monto', 'total', 'id_usuario', 'id_cliente'], 'required'],
-            [['cantidad_foto', 'monto', 'total', 'id_usuario', 'id_cliente'], 'integer'],
-            [['id_cliente'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::className(), 'targetAttribute' => ['id_cliente' => 'id_cliente']],
+            [['cantidad_foto', 'monto', 'total', 'id_usuario', 'id_cliente','cedula'], 'integer'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],
+            [['id_cliente'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::className(), 'targetAttribute' => ['id_cliente' => 'id_cliente']],
         ];
     }
 
@@ -59,17 +60,17 @@ class FotoAdicional extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCliente()
+    public function getUsuario()
     {
-        return $this->hasOne(Cliente::className(), ['id_cliente' => 'id_cliente']);
+        return $this->hasOne(Usuario::className(), ['id_usuario' => 'id_usuario']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuario()
+    public function getCliente()
     {
-        return $this->hasOne(Usuario::className(), ['id_usuario' => 'id_usuario']);
+        return $this->hasOne(Cliente::className(), ['id_cliente' => 'id_cliente']);
     }
 
     /**

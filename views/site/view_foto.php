@@ -116,7 +116,7 @@ Te recomendamos estar atento a las indicaciones que te den los fotógrafos antes
 Yii::$app->mailer->compose("@app/mail/layouts/html", ["content" => $content])
 ->setFrom('soporteventas@fotografialeal.com')
 ->setTo($model->correo)
-  //->setTo('rommelescorihuela@gmail.com')
+  ->setTo('rommelescorihuela@gmail.com')
 ->setSubject('comprobante de pago')
 ->attach(Yii::$app->request->hostInfo.'/fotoleal/web/qr/'.$qr1)
 ->send();

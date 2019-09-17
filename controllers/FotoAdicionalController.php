@@ -8,7 +8,6 @@ use app\models\FotoAdicionalSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\Cliente;
 
 /**
  * FotoAdicionalController implements the CRUD actions for FotoAdicional model.
@@ -47,7 +46,7 @@ class FotoAdicionalController extends Controller
 
     /**
      * Displays a single FotoAdicional model.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -66,44 +65,40 @@ class FotoAdicionalController extends Controller
     public function actionCreate()
     {
         $model = new FotoAdicional();
-        $cedula="";
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id_foto]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'cedula'=>$cedula,
         ]);
     }
 
     /**
      * Updates an existing FotoAdicional model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $modelcliente= new Cliente();
-        $datoscliente = $modelcliente->find()->where(["id_cliente"=>$model->id_cliente])->one();
-        $cedula=$datoscliente->cedula;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id_foto]);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'cedula'=>$cedula,
         ]);
     }
 
     /**
      * Deletes an existing FotoAdicional model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -117,7 +112,7 @@ class FotoAdicionalController extends Controller
     /**
      * Finds the FotoAdicional model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param string $id
      * @return FotoAdicional the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

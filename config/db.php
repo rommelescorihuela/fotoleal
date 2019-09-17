@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=supeksnc_fotoleal',
+    'dsn' => 'mysql:host=localhost;dbname=fotoleal',
     'username' => 'admin',
-    'password' => 'admin',
+    'password' => 'admin123456',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
